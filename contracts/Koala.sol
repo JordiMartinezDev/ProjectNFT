@@ -2,10 +2,9 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Koala is ERC721, ERC721URIStorage, Ownable {
+contract Koala is ERC721, Ownable {
     uint256 private _nextTokenId;
 
     constructor()
@@ -17,27 +16,27 @@ contract Koala is ERC721, ERC721URIStorage, Ownable {
         return "https://ethereum-blockchain-developer.com/2022-06-nft-truffle-hardhat-foundry/nftdata/";
     }
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    function safeMint(address to) public onlyOwner {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
     }
 
     // The following functions are overrides required by Solidity.
 
     function tokenURI(uint256 tokenId)
+        pure
         public
-        view
-        override(ERC721, ERC721URIStorage)
+        
+        override(ERC721)
         returns (string memory)
     {
-        return super.tokenURI(tokenId);
+        return string(abi.encodePacked(_baseURI(),"spacebear_",(tokenId+1),".json"));
     }
 
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721URIStorage)
+        override(ERC721)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
