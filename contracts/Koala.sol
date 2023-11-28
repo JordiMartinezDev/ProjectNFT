@@ -5,7 +5,11 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Koala is ERC721, Ownable {
+
+    
+    
     uint256 private _nextTokenId;
+    uint256 tokenCounter;
 
     constructor()
         ERC721("Koala", "KLA")
@@ -17,11 +21,21 @@ contract Koala is ERC721, Ownable {
     }
 
     function safeMint(address to) public onlyOwner {
-        uint256 tokenId = _nextTokenId++;
-        _safeMint(to, tokenId);
+        
+        uint256 tokenId = tokenCounter;
+        tokenCounter++;
+        _safeMint(to,tokenId);
     }
 
+    function buyToken() public payable{
+
+        uint256 tokenId = tokenCounter;
+        require(msg.value == tokenId * 0.1 ether, "Funds sent are incorrect");
+        tokenCounter++;
+        _safeMint(msg.sender,tokenId);
+    }
     // The following functions are overrides required by Solidity.
+
 
     function tokenURI(uint256 tokenId)
         pure
