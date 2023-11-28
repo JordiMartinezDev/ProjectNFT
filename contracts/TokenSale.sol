@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.22;
+pragma solidity 0.8.21;
 
 abstract contract ERC20 {
     function transfer(address _from,address _to,uint256 _value) public virtual returns (bool success);
