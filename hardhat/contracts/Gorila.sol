@@ -4,7 +4,7 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Koala is ERC721, Ownable {
+contract Gorila is ERC721, Ownable {
 
     
     
@@ -12,7 +12,7 @@ contract Koala is ERC721, Ownable {
     uint256 tokenCounter;
 
     constructor()
-        ERC721("Koala", "KLA")
+        ERC721("Gorila", "GLA")
         Ownable(msg.sender)
     {}
 
